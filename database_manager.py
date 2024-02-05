@@ -1,9 +1,7 @@
 import sqlite3
-from dotenv import load_dotenv
 from os import getenv
 
-
-
+from dotenv import load_dotenv
 
 
 class Database:
