@@ -1,10 +1,8 @@
+from os import getenv
+
 from database_manager import Database
 from email_reminder import MailMessage
 from user_interface import Gui
-from os import getenv
-
-
-
 
 
 def init_db(db_cursor: str):
@@ -42,7 +40,6 @@ def init_db(db_cursor: str):
 
 
 if __name__ == "__main__":
-
     db = Database()
     init_db(db.cursor)
     tk_inter = Gui(db)
