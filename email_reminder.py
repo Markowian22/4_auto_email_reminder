@@ -1,17 +1,20 @@
-from database_manager import Database
 import smtplib
 import ssl
-from dotenv import load_dotenv
-from os import getenv
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from os import getenv
+
+from dotenv import load_dotenv
+
+from database_manager import Database
 
 
-class MailMessage():
+class MailMessage:
     """
     The MailMessage class is responsible for managing the email application,
     including sending reminder emails to users.
     """
+
     def __init__(self, smtp_server: str, port: int):
         """
         Initializes the Aplication class by setting up the SMTP
@@ -29,9 +32,10 @@ class MailMessage():
         self.context.check_hostname = False
         self.context.verify_mode = ssl.CERT_NONE
 
-        self.server = smtplib.SMTP_SSL(self.smtp_server,
-                                       self.port, context=self.context)
-        self.server.login(getenv('EMAIL'), getenv('PASSWORD'))
+        self.server = smtplib.SMTP_SSL(
+            self.smtp_server, self.port, context=self.context
+        )
+        self.server.login(getenv("EMAIL"), getenv("PASSWORD"))
 
     def send_reminder_emails_to_overdue_users(self, sender: str, db: Database):
         """
@@ -43,15 +47,15 @@ class MailMessage():
         """
         reminder = db.check_users_book_return_date()
         for id, email, name, book_title, return_at, date_diff in reminder:
-            text = f'''Hey {name},<br>
+            text = f"""Hey {name},<br>
             you are <b>{int(date_diff)}</b> days overdue for your book.<br>
-            ID: <b>{id}</b>'''
+            ID: <b>{id}</b>"""
 
             try:
-                msg = MIMEMultipart('alternative')
-                msg['Subject'] = "Przypomnienie"
-                msg['From'] = sender
-                msg['To'] = email
+                msg = MIMEMultipart("alternative")
+                msg["Subject"] = "Przypomnienie"
+                msg["From"] = sender
+                msg["To"] = email
 
                 html = f"""\
                 <html>
@@ -60,7 +64,7 @@ class MailMessage():
                 </body>
                 </html>
                 """
-                part = MIMEText(html, 'html')
+                part = MIMEText(html, "html")
                 msg.attach(part)
 
                 self.server.sendmail(sender, email, msg.as_string())

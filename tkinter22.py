@@ -1,7 +1,6 @@
-from tkinter.ttk import Label
-from tkinter.messagebox import showerror, showwarning, showinfo
-
 import tkinter as tk
+from tkinter.messagebox import showerror, showinfo, showwarning
+from tkinter.ttk import Label
 
 root = tk.Tk()
 # zmiana tytułu okienka
