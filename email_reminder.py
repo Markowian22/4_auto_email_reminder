@@ -1,14 +1,7 @@
 import smtplib
 import ssl
-from calendar import day_abbr
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from os import getenv
-
-from dotenv import load_dotenv
-from h11 import Data
-
-from database_manager import Database
 
 
 class MailMessage:
