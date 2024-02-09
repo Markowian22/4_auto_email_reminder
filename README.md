@@ -28,5 +28,8 @@ Each file contains a class that encapsulates a specific part of the application:
 ## Setup
 To run the application, you need to have Python installed on your machine. You also need to install the required dependencies, which can be done by running `pip install -r requirements.txt`.
 
+## Before first run
+To run the project you must put your email config to .env file. See example.
+
 ## Usage
 To start the application, run `python main.py` from the command line.

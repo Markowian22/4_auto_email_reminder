@@ -1,7 +1,4 @@
 import sqlite3
-from os import getenv
-
-from dotenv import load_dotenv
 
 
 class Database:
@@ -10,9 +7,8 @@ class Database:
     SQLite3 database and performing operations on the data.
     """
 
-    def __init__(self):
-        load_dotenv()
-        self.connection = sqlite3.connect(getenv("DB_NAME"))
+    def __init__(self, db_name: str):
+        self.connection = sqlite3.connect(db_name)
         self.cursor = self.connection.cursor()
 
     def __del__(self):
